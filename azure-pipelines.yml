@@ -18,10 +18,15 @@ steps:
   inputs:
     version: '2.1.300' # replace this value with the version that you need for your project
 
+# do this before your build tasks
 - task: DotNetCoreCLI@2
-  displayName: Build
   inputs:
     command: restore
+    projects: '**/*.csproj'
+    feedsToUse: config
+    nugetConfigPath: NuGet.config    # Relative to root of the repository
+    externalFeedCredentials: test-cloud-feed
+# ...
 
 - task: DotNetCoreCLI@2
   displayName: Build
